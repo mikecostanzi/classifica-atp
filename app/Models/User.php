@@ -17,11 +17,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $table = 'user';
+    public $timestamps = false;
+    public $primaryKey='user_id';
     protected $fillable = [
-        'name',
+        'user_id',
+        'nome',
+        'cognome',
         'email',
         'password',
+        'ruolo'
     ];
+    public function hasRole($role){
+        $role = (array)$role;
+        return in_array($this->ruolo, $role);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
